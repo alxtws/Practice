@@ -59,8 +59,7 @@ const routes = {
             </table>
         </div>
         <div style= "margin-top: 17px;">
-            <button id="Button" type="button">Выставить зачет</button>
-            <button id="Cleaning" type="button" class = "hidden">Очистить</button>
+            <button id="Button" onClick="getResults()" type="button">Выставить зачет</button>
         </div>
         <div style= "margin-top: 17px;">
             <p id="Result"></p>
@@ -91,12 +90,13 @@ function loadContent() {
     var marksCount = contentDiv.querySelector('#marksCount');
     var button = contentDiv.querySelector('#Button');
     previusValue = marksCount.value;
+    var result = contentDiv.querySelector('#Result');
     if (marksCount) {      
         marksCount.addEventListener('input', function(event) {  
-           MarksCountControl (event, marksCount, previusValue, button) 
+           MarksCountControl (event, marksCount, previusValue, button, result) 
         })
         contentDiv.addEventListener('input', (event) =>{
-            MarkContor (event);
+            MarkContor (event, result);
         })  
     };
     
@@ -104,14 +104,14 @@ function loadContent() {
     var classCount = contentDiv.querySelector('#classCount');
     if (classCount) {
         classCount.addEventListener('input', function(event) {
-            ClassCountControl(event, classCount, contentDiv);
+            ClassCountControl(event, classCount, contentDiv, result);
         });
     }; 
 // пропуски    
     var elements = contentDiv.querySelectorAll('.missClassCount');
     elements.forEach(function(element){
        element.addEventListener('input', function(event) {
-            MissClassCountControl(element);
+            MissClassCountControl(element, result);
        }); 
     })
     
@@ -123,7 +123,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-function MarksCountControl (event, marksCount, previusValue, button) {
+function MarksCountControl (event, marksCount, previusValue, button, result) {
+    
     if (marksCount.value === "" && isNaN(previusValue) == false){ 
         marksCount.value = "";
         var table = document.getElementById('tabl'); 
@@ -161,12 +162,12 @@ function MarksCountControl (event, marksCount, previusValue, button) {
     previusValue = event.target.value;
 }
 
-function ClassCountControl (event, classCount, contentDiv) {
+function ClassCountControl (event, classCount, contentDiv, result) {
+    result.textContent = "";
     var elements = contentDiv.querySelectorAll('.missClassCount');
     if (classCount.value === ""){ 
          classCount.value = "";
          elements.forEach(function(element){
-           console.log("eee");
            element.setAttribute('disabled', 'true');
         }) 
      }
@@ -189,7 +190,8 @@ function ClassCountControl (event, classCount, contentDiv) {
      }
 }
 
-function MarkContor (event){
+function MarkContor (event, result){
+    result.textContent = "";
     if (event.target.classList.contains('mark')){
         if (isNaN(event.target.value)){
             alert ("Необходимо ввести число!");
@@ -206,19 +208,23 @@ function MarkContor (event){
     }
 }
 
-function MissClassCountControl(element){
+function MissClassCountControl(element, result){
+    result.textContent = "";
     const maxAttributeValue = element.getAttribute('max');
     if (element.value === ""){ 
         element.value = "";
     }
     else if (parseInt(element.value) > parseInt(maxAttributeValue)) {
-        console.log("атрибут: " + maxAttributeValue + " Элемент: " + element.value);
-        
         alert ("Значение не может быть больше " + maxAttributeValue);
-        element.value = element.value.charAt(0);
+        if (element.value.length > 1){
+            element.value = element.value.charAt(0);
+        }
+        else {element.value = "";}
     }
     else if (element.value < 0  && element.value != "") {
         alert ("Значение не может быть меньше 0");
         element.value = "";
     }   
 }
+
+
