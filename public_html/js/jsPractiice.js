@@ -1,3 +1,4 @@
+import { getResults } from './getResults.js';
 const routes = {
     home: `
         <h2>Выставление зачета</h2>
@@ -59,7 +60,7 @@ const routes = {
             </table>
         </div>
         <div style= "margin-top: 17px;">
-            <button id="Button" onClick="getResults()" type="button">Выставить зачет</button>
+            <button id="Button" type="button">Выставить зачет</button>
         </div>
         <div style= "margin-top: 17px;">
             <p id="Result"></p>
@@ -79,9 +80,7 @@ function loadContent() {
     const hash = location.hash.replace('#', '');
     const contentDiv = document.querySelector('.content');
     contentDiv.innerHTML = routes[hash] || routes.home;
-    // Получаем все элементы с классом "mark"
     var elements = contentDiv.querySelectorAll('.mark[type="text"]');
-    // Проходим по каждому элементу и устанавливаем атрибут maxlength="1"
     elements.forEach(function(element) {
         element.setAttribute('maxlength', '1');
     });
@@ -89,11 +88,11 @@ function loadContent() {
 // кол-во оценок   
     var marksCount = contentDiv.querySelector('#marksCount');
     var button = contentDiv.querySelector('#Button');
-    previusValue = marksCount.value;
+    var previusValue = marksCount.value;
     var result = contentDiv.querySelector('#Result');
     if (marksCount) {      
         marksCount.addEventListener('input', function(event) {  
-           MarksCountControl (event, marksCount, previusValue, button, result) 
+           MarksCountControl (event, marksCount, previusValue, button, result, contentDiv) 
         })
         contentDiv.addEventListener('input', (event) =>{
             MarkContor (event, result);
@@ -115,15 +114,31 @@ function loadContent() {
        }); 
     })
     
+//    Предмет
+    var subject = contentDiv.querySelector('#choose1');
+    if (subject) {
+        subject.addEventListener('input', function(event){
+           result.textContent = ""; 
+        })
+    }
+    
+    const inactiveHrefs = contentDiv.querySelectorAll('#inactiveHref');
+    inactiveHrefs.forEach(function(href) {
+        href.addEventListener('click', function(event) {
+            event.preventDefault();
+        });
+    })
+    
+    button.addEventListener('click', getResults);   
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('hashchange', loadContent);
-    loadContent(); // Загрузка контента при начальной загрузке страницы
+    loadContent(); 
 });
 
 
-function MarksCountControl (event, marksCount, previusValue, button, result) {
+function MarksCountControl (event, marksCount, previusValue, button, result, contentDiv) {
     
     if (marksCount.value === "" && isNaN(previusValue) == false){ 
         marksCount.value = "";
@@ -226,5 +241,4 @@ function MissClassCountControl(element, result){
         element.value = "";
     }   
 }
-
 
