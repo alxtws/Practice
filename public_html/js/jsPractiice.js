@@ -1,4 +1,5 @@
 import { getResults } from './getResults.js';
+import './css/cssPractice.css';
 const routes = {
     home: `
         <h2>Выставление зачета</h2>
@@ -35,7 +36,7 @@ const routes = {
                     Количество занятий:    
                 </p>
                 <p>
-                    <input type="number" style= "width: 100%;" id="classCount" step="1" min="1" max="15" value="1"/>
+                    <input type="number" style= "width: 100%;" id="classCount" step="1" min="1" max="20" value="1"/>
                 </p>
             </div>            
         </div>
@@ -181,6 +182,7 @@ function MarksCountControl (event, marksCount, previusValue, button, result, con
 
 function ClassCountControl (event, classCount, contentDiv, result) {
     result.textContent = "";
+    const maxAttributeValue = classCount.getAttribute('max');
     var elements = contentDiv.querySelectorAll('.missClassCount');
     if (classCount.value === ""){ 
          classCount.value = "";
@@ -188,9 +190,15 @@ function ClassCountControl (event, classCount, contentDiv, result) {
            element.setAttribute('disabled', 'true');
         }) 
      }
-     else if (classCount.value > 15) {
-         alert ("Значение не может быть больше 15");
-         classCount.value = classCount.value.charAt(0);
+     else if (parseInt(classCount.value) > parseInt(maxAttributeValue)) {
+         alert ("Значение не может быть больше " + maxAttributeValue);
+         if (classCount.value.length == 2){
+            classCount.value = classCount.value.charAt(0);
+         }
+         else {
+            classCount.value = classCount.value.slice(0, -1); 
+         }
+         
      }
      else if ((classCount.value < 1  && classCount.value != "")) {
          alert ("Значение не может быть меньше 1");
