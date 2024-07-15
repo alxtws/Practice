@@ -1,3 +1,4 @@
+
 export function getResults(){
     const contentDiv = document.querySelector('.content');
     var result = contentDiv.querySelector('#Result');
@@ -78,7 +79,7 @@ function getAverageScore(marks){
 }
 
 function sendResultsToGithub(subject, fio, resultText) {
-    const token = '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';
+    const token = process.env.GITHUB_TOKEN;;
     const repo = 'alxtws/BackendPractice';
     const message = 'Добавление результатов';
     const utf8Content = `Предмет: ${subject.value}\nФИО: ${fio.value}\nРезультат: ${resultText}`;

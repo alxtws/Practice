@@ -88,9 +88,9 @@ function loadContent() {
 // кол-во оценок   
     var marksCount = contentDiv.querySelector('#marksCount');
     var button = contentDiv.querySelector('#Button');
-    var previusValue = marksCount.value;
     var result = contentDiv.querySelector('#Result');
-    if (marksCount) {      
+    if (marksCount) { 
+        var previusValue = marksCount.value;
         marksCount.addEventListener('input', function(event) {  
            MarksCountControl (event, marksCount, previusValue, button, result, contentDiv) 
         })
@@ -129,7 +129,9 @@ function loadContent() {
         });
     })
     
-    button.addEventListener('click', getResults);   
+    if (button){
+        button.addEventListener('click', getResults);   
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
