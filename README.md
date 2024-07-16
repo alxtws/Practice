@@ -1,7 +1,6 @@
 # Система выставления зачета
----
 
-##Описание
+Описание
 ---
 Это веб-приложение для выставления зачета. Пользователь может выбрать предмет, ввести количество оценок, 
 ФИО студента, количество занятий, количество пропусков по уважительной и неуважительной причине и оценки,
@@ -9,7 +8,7 @@
 количество пропусков по неуважительной причине меньше 10% - студент получает зачет. Результаты хранятся в файле 
 results.txt в репозитории BackendPractice.
 
-##Технологии
+Технологии
 ---
 Проект использует следующие технологии и библиотеки:
 - HTML, CSS, JavaScript
@@ -21,23 +20,23 @@ results.txt в репозитории BackendPractice.
   - webpack-dev-server
   - html-webpack-plugin
 - Babel
-  -@babel/core
-  -@babel/preset-env
-  -babel-loader
+  - @babel/core
+  - @babel/preset-env
+  - babel-loader
 - Загрузчики и плагины Webpack
-  -css-loader
-  -style-loader
+  - css-loader
+  - style-loader
 - Зависимости
-  -buffer
-  -crypto-browserify
-  -dotenv
-  -os-browserify
-  -path-browserify
-  -process
-  -stream-browserify
-  -vm-browserify
+  - buffer
+  - crypto-browserify
+  - dotenv
+  - os-browserify
+  - path-browserify
+  - process
+  - stream-browserify
+  - vm-browserify
   
-##Установка и запуск
+Установка и запуск
 ---
 Для сборки и запуска проекта выполните:
 
