@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Указываем исходную строку
-token="GITHUB_TOKEN=9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"
+token="GITHUB_TOKEN=ПРИВЕТgПРИВЕТhПРИВЕТpПРИВЕТ_iR5XUlZ1lLudLl9ПРИВЕТJxlcv3QWQПРИВЕТCLSkEP4eQu2R"
 
-# Удаляем первую цифру '9' из строки
-modifiedToken="${token//9/}"
+# Удаляем все вхождения 'ПРИВЕТ' из строки
+modifiedToken=${token//ПРИВЕТ/}
 
 # Создаем файл .env и записываем в него модифицированную строку
 envFilePath=".env"
