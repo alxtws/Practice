@@ -151,7 +151,12 @@ function MarksCountControl (event, marksCount, previusValue, button, result, con
     }
     else if (marksCount.value > 10) {
         alert ("Значение не может быть больше 10");
-        marksCount.value = marksCount.value.charAt(0);
+        if (marksCount.value.length == 2){
+            marksCount.value = marksCount.value.charAt(0);
+        }
+        else {
+            marksCount.value = marksCount.value.slice(0, -1);
+        }
     }
     else if ((marksCount.value < 1  && marksCount.value != "")) {
         alert ("Значение не может быть меньше 1");
@@ -241,8 +246,11 @@ function MissClassCountControl(element, result){
     }
     else if (parseInt(element.value) > parseInt(maxAttributeValue)) {
         alert ("Значение не может быть больше " + maxAttributeValue);
-        if (element.value.length > 1){
+        if (element.value.length == 2){
             element.value = element.value.charAt(0);
+        }
+        else if (element.value.length > 2){
+            element.value = element.value.slice(0, -1); 
         }
         else {element.value = "";}
     }
