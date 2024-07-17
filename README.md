@@ -36,7 +36,23 @@ results.txt в репозитории BackendPractice.
   - stream-browserify
   - vm-browserify
   
-Установка и запуск
+Установка и запуск на Windows и Linux
 ---
-Для сборки и запуска проекта выполните:
-
+Для сборки и запуска проекта на Windows выполните:
+```bash
+git clone https://github.com/alxtws/Practice
+cd Practice
+.\script.bat
+npm install
+npm run build-dev
+npm start
+```
+Для сборки и запуска проекта на Linux выполните:
+```bash
+git clone https://github.com/alxtws/Practice
+cd Practice
+./script.sh
+npm install
+npm run build-dev
+npm start
+```
